@@ -4,11 +4,14 @@ describe('options', () => {
     cy.get('[id="_username"]').type('sylius');
     cy.get('[id="_password"]').type('sylius');
     cy.get('.primary').click();
-  });
-  // Remove .only and implement others test cases!
-  it.only('edit size XL to GG in Portuguese (Portugal)', () => {
     // Click in options in side menu
     cy.clickInFirst('a[href="/admin/product-options/"]');
+  });
+
+  // Remove .only and implement others test cases!
+  it('edit size XL to GG in Portuguese (Portugal)', () => {
+    // Click in options in side menu
+    // cy.clickInFirst('a[href="/admin/product-options/"]');
     // Type in value input to search for specify option
     cy.get('[id="criteria_search_value"]').type('jeans_size');
     // Click in filter blue button
@@ -23,12 +26,57 @@ describe('options', () => {
     // Assert that option has been updated
     cy.get('body').should('contain', 'Product option has been successfully updated.');
   });
-  it('test case 2', () => {
-    // Implement your test case 2 code here
+  
+  // tests to create new product
+  it('create new product and salve', () => {
+    
   });
-  it('test case 3', () => {
-    // Implement your test case 3 code here
+  it('create new product with empty fileds', () => {
+    
+  });
+  it('create new product and dont save, click on cancel', () => {
+    
   });
 
-  // Implement the remaining test cases in a similar manner
+  // test to filter
+  it('filter products with existenting product', () => {
+    // Type in value input to search for specify option
+    cy.get('[id="criteria_search_value"]').type('Dress height');
+    // Click in filter blue button
+    cy.get('*[class^="ui blue labeled icon button"]').click();
+
+     // Assert that has a product Dress height in list of products
+    cy.get('*[class⁼"ui sortable stackable very basic celled table"]').should('contain', 'Dress height');
+  });
+
+  it('filter products with nonexistent product', () => {
+    // Type in value input to search for specify option
+    cy.get('[id="criteria_search_value"]').type('product nonexistent');
+    // Click in filter blue button
+    cy.get('*[class^="ui blue labeled icon button"]').click();
+
+     // Assert that has a info with the message 'There are no results to display'
+    cy.get('*[class^="ui icon info message"]').should('contain', 'There are no results to display');
+  });
+
+  it.only('clean the filters with a filter applied', () => {
+    // Type in value input to search for specify option
+    cy.get('[id="criteria_search_value"]').type('product nonexistent');
+    // Click in filter blue button
+    cy.get('*[class^="ui blue labeled icon button"]').click();
+    // Click in clear filter button
+    cy.get('*[class^="ui labeled icon button"]').last().click();
+
+    // Assert exist a table and the value field is empty
+    cy.get('*[class^="ui sortable stackable very basic celled table"]').should('exist')
+    cy.get('[id="criteria_search_value"]').should('be.empty')
+  });
+
+  // test to delete product
+  it('delete product by delete buttom actions', () => {
+    
+  });
+  it('delete product by selecting the checkbox and delete buttom head', () => {
+    
+  });
 });
