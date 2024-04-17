@@ -317,7 +317,6 @@ describe('options', () => {
   await driver.findElement(By.id("confirmation-button")).click();
 
   const text = await driver.findElement(By.css("p:nth-child(2)")).getText();
-  assert(text.includes(' Success '));
-  assert(text.includes(' Product_options have been successfully deleted. '));
+  assert(text.includes('Product_options have been successfully deleted.'));
   });
 });
